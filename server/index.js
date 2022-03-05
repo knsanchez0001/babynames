@@ -143,7 +143,6 @@ app.get('/top_ten_names_state/:state/:year', async (req, res) => {
                 '$limit': 10
             }
         ];
-        console.log(query);
         const result = await retrieveTwoCols(state_female_names, state_male_names, query);
         res.header("Content-Type", 'application/json');
         res.send(JSON.stringify(result, null, 4));
