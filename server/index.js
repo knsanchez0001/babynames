@@ -4,7 +4,6 @@ const app = express();
 const port = process.env.PORT || 8080;
 
 const { MongoClient } = require('mongodb');
-const { resolveNaptr } = require('dns');
 const baby_names = "baby_names";
 const male_names = "male_names";
 const female_names = "female_names";
@@ -20,27 +19,83 @@ app.get('/top_ten_names/:year', async (req, res) => {
         const year = parseInt(req.params.year);
         const db = client.db(baby_names);
         const female_col = db.collection(female_names);
-        const females = await female_col.aggregate([
-            { $match: { year: year } },
-            { $sort: { count: -1 } },
-            { $limit: 10 },
-            { $unset: ["_id", "year"] }
-        ]).toArray();
+        const females = await female_col.aggregate(
+            [
+                {
+                    '$project': {
+                        'years': {
+                            '$filter': {
+                                'input': '$years',
+                                'as': 'val',
+                                'cond': {
+                                    '$eq': [
+                                        '$$val.year', year
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }, {
+                    '$unwind': {
+                        'path': '$years'
+                    }
+                }, {
+                    '$project': {
+                        'count': '$years.count',
+                        'rank': '$years.rank'
+                    }
+                }, {
+                    '$sort': {
+                        'rank': 1
+                    }
+                }, {
+                    '$limit': 10
+                }
+            ]
+        ).toArray();
         const male_col = db.collection(male_names);
-        const males = await male_col.aggregate([
-            { $match: { year: year } },
-            { $sort: { count: -1 } },
-            { $limit: 10 },
-            { $unset: ["_id", "year"] }
-        ]).toArray();
-        res.header("Content-Type",'application/json');
-        res.send(JSON.stringify({females, males}, null, 4));
+        const males = await male_col.aggregate(
+            [
+                {
+                    '$project': {
+                        'years': {
+                            '$filter': {
+                                'input': '$years',
+                                'as': 'val',
+                                'cond': {
+                                    '$eq': [
+                                        '$$val.year', year
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                }, {
+                    '$unwind': {
+                        'path': '$years'
+                    }
+                }, {
+                    '$project': {
+                        'count': '$years.count',
+                        'rank': '$years.rank'
+                    }
+                }, {
+                    '$sort': {
+                        'rank': 1
+                    }
+                }, {
+                    '$limit': 10
+                }
+            ]
+        ).toArray();
+        res.header("Content-Type", 'application/json');
+        res.send(JSON.stringify({ females, males }, null, 4));
     } catch (err) {
         res.send(`Failed to retrieve data:\n${err.stack}`);
     }
 });
 
-app.get('/top_names_range/:sex/:name/:startYear/:endYear', async (req, res) => {
+app.get('/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
     try {
         const sex = req.params.sex;
         const name = req.params.name;
@@ -48,17 +103,39 @@ app.get('/top_names_range/:sex/:name/:startYear/:endYear', async (req, res) => {
         const endYear = parseInt(req.params.endYear);
         const db = client.db(baby_names);
         const col = db.collection(sex === "F" ? female_names : male_names);
-        const arr = await col.aggregate([
-            {
-                $match: {
-                    year: { $gte: startYear, $lte: endYear },
-                    name: name
+        const arr = await col.aggregate(
+            [
+                {
+                    '$match': {
+                        '_id': name
+                    }
+                }, {
+                    '$unset': '_id'
+                }, {
+                    '$unwind': {
+                        'path': '$years'
+                    }
+                }, {
+                    '$project': {
+                        'year': '$years.year',
+                        'rank': '$years.rank',
+                        'count': '$years.count'
+                    }
+                }, {
+                    '$match': {
+                        'year': {
+                            '$gte': startYear,
+                            '$lte': endYear
+                        }
+                    }
+                }, {
+                    '$sort': {
+                        'year': -1
+                    }
                 }
-            },
-            { $sort: { year: -1 } },
-            { $unset: ["_id", "name"] }
-        ]).toArray();
-        res.header("Content-Type",'application/json');
+            ]
+        ).toArray();
+        res.header("Content-Type", 'application/json');
         res.send(JSON.stringify(arr, null, 4));
     } catch (err) {
         res.send(`Failed to retrieve data:\n${err.stack}`);
