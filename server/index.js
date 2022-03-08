@@ -1,5 +1,4 @@
 const express = require('express');
-const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -135,6 +134,73 @@ app.get('/top_ten_names_state/:state/:year', async (req, res) => {
         }
     ];
     const result = await retrieveTwoCols(state_female_names, state_male_names, query);
+    res.header("Content-Type", 'application/json');
+    res.send(JSON.stringify(result, null, 4));
+});
+
+app.get('/top_names_range/:startYear/:endYear', async (req, res) => {
+    const startYear = parseInt(req.params.startYear);
+    const endYear = parseInt(req.params.endYear);
+    const query = [
+        {
+            '$project': {
+                'years': {
+                    '$filter': {
+                        'input': '$years',
+                        'as': 'y',
+                        'cond': {
+                            '$and': [
+                                {
+                                    '$gte': [
+                                        '$$y.year', startYear
+                                    ]
+                                }, {
+                                    '$lte': [
+                                        '$$y.year', endYear
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        }, {
+            '$project': {
+                'total': {
+                    '$sum': '$years.count'
+                }
+            }
+        },
+        {
+            '$match': {
+                'total': {
+                    '$gt': 0
+                }
+            }
+        },
+        {
+            '$setWindowFields': {
+                'sortBy': {
+                    'total': -1
+                },
+                'output': {
+                    'rank': {
+                        '$rank': {}
+                    }
+                }
+            }
+        }
+        ,
+        {
+            '$sort': {
+                'total': 1
+            }
+        },
+        {
+            '$limit': 15
+        }
+    ];
+    const result = await retrieveTwoCols(female_names, male_names, query);
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4));
 });
