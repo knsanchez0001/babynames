@@ -12,7 +12,8 @@ const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@c
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 app.get('/', (req, res) => {
-    res.send('Hello World!')
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send('Hello World!');
 });
 
 app.get('/top_ten_names/:year', async (req, res) => {
@@ -51,6 +52,7 @@ app.get('/top_ten_names/:year', async (req, res) => {
     ];
     const result = await retrieveTwoCols(female_names, male_names, query);
     res.header("Content-Type", 'application/json');
+    res.set('Access-Control-Allow-Origin', '*');
     res.send(JSON.stringify(result, null, 4));
 });
 
