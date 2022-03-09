@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 const app = express();
 const port = process.env.PORT || 8080;
 
@@ -11,9 +12,12 @@ const state_female_names = "state_female_names";
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ufxrh.mongodb.net/${baby_names}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
+app.use(express.static(path.join(__dirname, '../client/build')));
+
 app.get('/', (req, res) => {
-    res.set('Access-Control-Allow-Origin', '*');
-    res.send('Hello World!');
+    // res.set('Access-Control-Allow-Origin', '*');
+    // res.send('Hello World!');
+    res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
 
 app.get('/top_ten_names/:year', async (req, res) => {
