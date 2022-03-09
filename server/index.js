@@ -16,8 +16,6 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('/', (req, res) => {
-    // res.set('Access-Control-Allow-Origin', '*');
-    // res.send('Hello World!');
     res.sendFile(path.join(__dirname+'../client/build/index.html'));
 });
 
