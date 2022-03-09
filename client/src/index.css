@@ -23,7 +23,31 @@ th, td {
     padding: 3px;
 }
 
-h3 {
+form {
     text-align: center;
+    align-items: center;
     margin-block-end: 1em;
+    font-size:large;
+    font-weight: bold;
+    height: 30px;
+}
+
+input {
+    font-size: large;
+    font-weight: bold;
+    width: 50px;
+    border: thin dashed black;
+    border-width: 1px;
+    margin-left: 5px;
+    /* height: 30px; */
+    text-align: center;
+}
+
+input[type='number'] {
+    -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
 }
