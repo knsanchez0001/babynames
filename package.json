@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/knsanchez0001/babynames#readme",
   "dependencies": {
+    "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "mongodb": "^4.4.1"
   }
