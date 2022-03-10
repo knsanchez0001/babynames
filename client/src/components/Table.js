@@ -5,7 +5,7 @@ const Table = ({ heading, body }) => {
         return <></>
     }
     return (
-        <table style={{ width: 500 }} className="table-c">
+        <table className="table-c">
             <thead>
                 <tr>
                     {heading.map((head, i) => <th key={i} bgcolor={head.color}>{head.label}</th>)}

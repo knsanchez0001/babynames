@@ -11,21 +11,21 @@ body {
 .table-c {
     margin-left: auto;
     margin-right: auto;
-    max-width: fit-content;
+    width: 50%;
+    min-width: max-content;
 }
 
 th, td {
     text-align: center;
-    vertical-align: bottom;
+    vertical-align: middle;
     padding: 3px;
+    height: 30px;
 }
 
 form {
     text-align: center;
     align-items: center;
     margin-block-end: 1em;
-    font-size: large;
-    font-weight: bold;
     height: 30px;
 }
 
@@ -117,13 +117,26 @@ img {
     padding: 0 0 0 .5rem;
 }
 
-.interest-form {
+.interest-div {
     padding: 1.5em 0;
 }
 
-.interest-form:first-child {
+.interest-div:first-child {
     border-bottom: 1px dotted #bbb;
 }
+
+.interest-form {
+    text-align: left;
+    align-items: left;
+    margin-block-end: 1em;
+}
+
+.interest-name {
+    width: 100px;
+    margin-right: 5px;
+    text-align: left;
+}
+
 
 @media (min-width: 48em) {
     img {
@@ -144,17 +157,17 @@ img {
         padding: .5rem 0 0 0;
     }
 
-    .interest-div {
+    .interest-wrapper {
         display: flex;
     }
 
-    .interest-form {
+    .interest-div {
         width: 50%;
         flex-flow: column nowrap;
         padding: 0 2em;
     }
 
-    .interest-form:first-child {
+    .interest-div:first-child {
         border-right: 1px dotted #bbb;
         border-bottom: none;
     }
