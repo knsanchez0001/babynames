@@ -1,8 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import IntroSection from '../IntroSection';
 
 const Timespan = () => {
+  const back = <Link className='a-top' to={'/'}>Back</Link>;
   return (
-    <div>Timespan</div>
+    <>
+      <IntroSection child={back} />
+      <section>
+        
+      </section>
+    </>
   )
 }
 

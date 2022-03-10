@@ -1,8 +1,16 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
+import IntroSection from '../IntroSection';
 
 const Top5Names = () => {
+  const back = <Link className='a-top' to={'/'}>Back</Link>;
   return (
-    <div>Top5Names</div>
+    <>
+      <IntroSection child={back} />
+      <section>
+        
+      </section>
+    </>
   )
 }
 

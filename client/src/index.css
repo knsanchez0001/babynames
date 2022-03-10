@@ -87,8 +87,11 @@ h3 {
 }
 
 a {
-    color: #15c;
     text-decoration: none;
+}
+
+.a-top {
+    color: #fff;
 }
 
 img {
