@@ -134,7 +134,6 @@ img {
     .icons-link {
         flex-basis: 20%;
         flex-flow: column nowrap;
-        max-width: 160px;
     }
 
     .icons-text {
