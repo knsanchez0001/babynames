@@ -8,10 +8,6 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.container {
-    padding-top: 1.5rem;
-}
-
 .table-c {
     margin-left: auto;
     margin-right: auto;
@@ -50,4 +46,39 @@ input[type='number'] {
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+}
+
+section {
+    padding: 1.5rem 0;
+}
+
+section:first-child {
+    background-color: #333;
+}
+
+section:nth-child(odd):not(section:first-child) {
+    background-color: #e1d7cd;
+}
+
+.header-c {
+    text-align: center;
+    background-image: linear-gradient(#fff 50%, #bbb 0, #bbb 55%, #fff 0);
+}
+
+.header-c-text {
+    background-color: #fff;
+    display: inline-block;
+    padding: 0 1.5rem;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+h3 {
+    margin-bottom: 1em;
+}
+
+.wrapper {
+    padding: 0 1em;
 }
