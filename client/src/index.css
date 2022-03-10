@@ -81,6 +81,9 @@ h3 {
 
 .wrapper {
     padding: 0 1em;
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 a {
@@ -94,9 +97,6 @@ img {
 }
 
 .icons-wrapper {
-    max-width: 960px;
-    margin-left: auto;
-    margin-right: auto;
     padding-top: 1em;
     padding-bottom: 1em;
 }
@@ -113,10 +113,18 @@ img {
     padding: 0 0 0 .5rem;
 }
 
-@media (min-width: 750px) {
+.interest-form {
+    padding: 1.5em 0;
+}
+
+.interest-form:first-child {
+    border-bottom: 1px dotted #bbb;
+}
+
+@media (min-width: 48em) {
     img {
-        height: 128px;
-        width: 128px;
+        height: 100%;
+        width: 100%;
     }
 
     .icons-div {
@@ -126,9 +134,25 @@ img {
     .icons-link {
         flex-basis: 20%;
         flex-flow: column nowrap;
+        max-width: 160px;
     }
 
     .icons-text {
         padding: .5rem 0 0 0;
+    }
+
+    .interest-div {
+        display: flex;
+    }
+
+    .interest-form {
+        width: 50%;
+        flex-flow: column nowrap;
+        padding: 0 2em;
+    }
+
+    .interest-form:first-child {
+        border-right: 1px dotted #bbb;
+        border-bottom: none;
     }
 }
