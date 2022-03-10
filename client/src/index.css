@@ -23,7 +23,7 @@ form {
     text-align: center;
     align-items: center;
     margin-block-end: 1em;
-    font-size:large;
+    font-size: large;
     font-weight: bold;
     height: 30px;
 }
@@ -40,7 +40,7 @@ input {
 }
 
 input[type='number'] {
-    -moz-appearance:textfield;
+    -moz-appearance: textfield;
 }
 
 input::-webkit-outer-spin-button,
@@ -81,4 +81,54 @@ h3 {
 
 .wrapper {
     padding: 0 1em;
+}
+
+a {
+    color: #15c;
+    text-decoration: none;
+}
+
+img {
+    height: 64px;
+    width: 64px;
+}
+
+.icons-wrapper {
+    max-width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.icons-link {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+}
+
+.icons-text {
+    display: inline-block;
+    font-weight: 500;
+    padding: 0 0 0 .5rem;
+}
+
+@media (min-width: 750px) {
+    img {
+        height: 128px;
+        width: 128px;
+    }
+
+    .icons-div {
+        display: flex;
+    }
+
+    .icons-link {
+        flex-basis: 20%;
+        flex-flow: column nowrap;
+    }
+
+    .icons-text {
+        padding: .5rem 0 0 0;
+    }
 }
