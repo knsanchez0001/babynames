@@ -27,17 +27,19 @@ const TopNamesTable = () => {
 
     const tableHeading = [{ label: 'Rank', color: '#eeeeee' }, { label: 'Male Name', color: '#99ccff' }, { label: 'Female Name', color: 'pink' }];
     return (
-        <>
-            <div>
-                <form onSubmit={(e) => { e.preventDefault(); setYear(document.getElementById('yearInput').value) }} >
-                    <label>Top 10 Baby Names of
-                        <input type='number' name='year' id='yearInput'
-                            defaultValue={2020} min='1880' max='2020' maxLength={4} />
-                    </label>
-                </form>
+        <section>
+            <div className='wrapper'>
+                <div>
+                    <form onSubmit={(e) => { e.preventDefault(); setYear(document.getElementById('yearInput').value) }} >
+                        <label>Top 10 Baby Names of
+                            <input type='number' name='year' id='yearInput'
+                                defaultValue={2020} min='1880' max='2020' maxLength={4} />
+                        </label>
+                    </form>
+                </div>
+                <Table heading={tableHeading} body={tableBody} />
             </div>
-            <Table heading={tableHeading} body={tableBody} />
-        </>
+        </section>
     )
 }
 
