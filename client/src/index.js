@@ -3,11 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import RankChange from './components/PopularityCategories/RankChange';
+import Top5Names from './components/PopularityCategories/Top5Names';
+import Timespan from './components/PopularityCategories/Timespan';
+import State from './components/PopularityCategories/State';
+import Territories from './components/PopularityCategories/Territories';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+  <BrowserRouter>
+    <Routes>
+      <Route path='/' element={<App />} />
+      <Route path='/rankchange' element={<RankChange />} />
+      <Route path='/top5names' element={<Top5Names />} />
+      <Route path='/timespan' element={<Timespan />} />
+      <Route path='/state' element={<State />} />
+      <Route path='/territories' element={<Territories />} />
+    </Routes>
+  </BrowserRouter>,
   document.getElementById('root')
 );
 

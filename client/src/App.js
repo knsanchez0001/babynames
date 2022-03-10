@@ -1,6 +1,6 @@
 import InterestForms from './components/InterestForms';
 import IntroSection from './components/IntroSection';
-import PopularityCategories from './components/PopularityCategories';
+import PopularityCategories from './components/PopularityCategories/PopularityCategories';
 import TopNamesTable from './components/TopNamesTable';
 
 function App() {
