@@ -39,6 +39,9 @@ const NamesByBirthYear = () => {
         <>
             <IntroSection child={back} />
             <section>
+                <h3 className='header-c'>
+                    <span className='header-c-text'>Popular Names in {year}</span>
+                </h3>
                 <Table heading={tableHeading} body={tableBody} />
             </section>
         </>
