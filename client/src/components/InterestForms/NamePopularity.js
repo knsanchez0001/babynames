@@ -6,9 +6,6 @@ import Table from '../Table';
 const NamePopularity = () => {
     const { name, start, sex } = useParams();
     const back = <Link className='a-top' to={'/'}>Back</Link>;
-    console.log(name);
-    console.log(start);
-    console.log(sex);
 
     let [tableBody, setTableBody] = useState(null);
 
