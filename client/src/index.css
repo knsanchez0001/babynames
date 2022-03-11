@@ -22,11 +22,15 @@ th, td {
     height: 30px;
 }
 
+fieldset {
+    margin-bottom: 1.5rem;
+    border: 0;
+}
+
 form {
     text-align: center;
     align-items: center;
     margin-block-end: 1em;
-    height: 30px;
 }
 
 input {
@@ -36,7 +40,6 @@ input {
     border: thin dashed black;
     border-width: 1px;
     margin-left: 5px;
-    /* height: 30px; */
     text-align: center;
 }
 
