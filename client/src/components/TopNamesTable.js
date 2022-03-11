@@ -33,7 +33,7 @@ const TopNamesTable = () => {
                     <form onSubmit={(e) => { e.preventDefault(); setYear(document.getElementById('yearInput').value) }} >
                         <label>Top 10 Baby Names of
                             <input type='number' name='year' id='yearInput'
-                                defaultValue={2020} min='1880' max='2020' maxLength={4} />
+                                defaultValue={2020} min='1880' max='2020' maxLength='4' />
                         </label>
                     </form>
                 </div>
