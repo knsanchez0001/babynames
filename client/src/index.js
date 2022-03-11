@@ -21,6 +21,7 @@ ReactDOM.render(
       <Route path='/state' element={<State />} />
       <Route path='/territories' element={<Territories />} />
       <Route path='/namepopularity/:name/:start/:sex' element={<NamePopularity />} />
+      <Route path='/namesbirthyear/:year/:rank' element={<NamePopularity />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')
