@@ -59,6 +59,47 @@ app.get('/top_ten_names/:year', async (req, res) => {
     res.send(JSON.stringify(result, null, 4));
 });
 
+app.get('/top_names/:year/:limit', async (req, res) => {
+    const year = parseInt(req.params.year);
+    const limit = parseInt(req.params.limit);
+    const query = [
+        {
+            '$project': {
+                'years': {
+                    '$filter': {
+                        'input': '$years',
+                        'as': 'val',
+                        'cond': {
+                            '$eq': [
+                                '$$val.year', year
+                            ]
+                        }
+                    }
+                }
+            }
+        }, {
+            '$unwind': {
+                'path': '$years'
+            }
+        }, {
+            '$project': {
+                'count': '$years.count',
+                'rank': '$years.rank'
+            }
+        }, {
+            '$sort': {
+                'rank': 1
+            }
+        }, {
+            '$limit': limit
+        }
+    ];
+    const result = await retrieveTwoCols(female_names, male_names, query);
+    res.header("Content-Type", 'application/json');
+    res.set('Access-Control-Allow-Origin', '*');
+    res.send(JSON.stringify(result, null, 4));
+});
+
 app.get('/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
     const sex = req.params.sex;
     const name = req.params.name;
