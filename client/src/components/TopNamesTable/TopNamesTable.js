@@ -7,7 +7,6 @@ const TopNamesTable = () => {
 
     useEffect(() => {
         const getBabynames = async () => {
-            console.log(year);
             const response = await fetch(`/top_ten_names/${year ? year.toString() : '2020'}`);
             if (response.ok) {
                 const json = JSON.parse(await response.text());
