@@ -6,10 +6,18 @@ import Table from '../Table';
 const NamesByBirthYear = () => {
     const { year, rank } = useParams();
     const back = <Link className='a-top' to={'/'}>Back</Link>;
-    console.log(year);
-    console.log(rank);
 
     let [tableBody, setTableBody] = useState(null);
+
+    const fillArray = (names) => {
+        if (!names.length || names.length === rank){
+            return;
+        }
+        const fillLength = rank - names.length;
+        const arr = new Array(fillLength);
+        arr.fill({id: '', count: 0})
+        names.push(...arr);
+    }
 
     useEffect(() => {
         const getBabynames = async () => {
@@ -18,6 +26,11 @@ const NamesByBirthYear = () => {
                 const json = JSON.parse(await response.text());
                 const females = json.females;
                 const males = json.males;
+
+                fillArray(males);
+                fillArray(females);
+                console.log(males.length);
+                console.log(females.length);
 
                 const body = [];
                 for (let i = 0; i < rank; i++) {
