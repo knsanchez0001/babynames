@@ -10,6 +10,7 @@ import Timespan from './components/PopularityCategories/Timespan';
 import State from './components/PopularityCategories/State';
 import Territories from './components/PopularityCategories/Territories';
 import NamePopularity from './components/InterestForms/NamePopularity';
+import NamesByBirthYear from './components/InterestForms/NamesByBirthYear';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -21,7 +22,7 @@ ReactDOM.render(
       <Route path='/state' element={<State />} />
       <Route path='/territories' element={<Territories />} />
       <Route path='/namepopularity/:name/:start/:sex' element={<NamePopularity />} />
-      <Route path='/namesbirthyear/:year/:rank' element={<NamePopularity />} />
+      <Route path='/namesbirthyear/:year/:rank' element={<NamesByBirthYear />} />
     </Routes>
   </BrowserRouter>,
   document.getElementById('root')

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Table from './Table';
+import Table from '../Table';
 
 const TopNamesTable = () => {
     let [tableBody, setTableBody] = useState(null);
