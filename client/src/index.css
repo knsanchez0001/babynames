@@ -5,7 +5,7 @@
 }
 
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", 'Poppins', sans-serif;
 }
 
 .table-c {
@@ -25,6 +25,7 @@ th, td {
 fieldset {
     margin-bottom: 1.5rem;
     border: 0;
+    display: inline-block; vertical-align: middle;
 }
 
 form {
@@ -33,18 +34,9 @@ form {
     margin-block-end: 1em;
 }
 
-input {
-    font-size: large;
-    font-weight: bold;
-    width: 50px;
-    border: thin dashed black;
-    border-width: 1px;
-    margin-left: 5px;
-    text-align: center;
-}
-
-input[type='number'] {
-    -moz-appearance: textfield;
+input[type="submit"] {
+    width: auto;
+    height: auto;
 }
 
 input::-webkit-outer-spin-button,
@@ -62,6 +54,18 @@ section:first-child {
 
 section:nth-child(odd):not(section:first-child) {
     background-color: #e1d7cd;
+}
+
+input, select {
+    padding: 3px;
+    font-size: 1.1em;
+    border: 1px solid #bbb;
+}
+
+#yearInput {
+    width: 50px;
+    margin-left: 5px;
+    text-align: center;
 }
 
 .header-c {
@@ -134,10 +138,16 @@ img {
     margin-block-end: 1em;
 }
 
-.interest-name {
-    width: 100px;
-    margin-right: 5px;
-    text-align: left;
+.interest-input {
+    max-width: 100px;
+}
+
+label {
+    margin-left: 10px;
+}
+
+legend {
+    font-size: 1.1em;
 }
 
 
