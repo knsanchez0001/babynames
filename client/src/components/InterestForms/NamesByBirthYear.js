@@ -13,7 +13,7 @@ const NamesByBirthYear = () => {
 
     useEffect(() => {
         const getBabynames = async () => {
-            const response = await fetch(`/top_names/${year}/${rank}`);
+            const response = await fetch(`/api/top_names/${year}/${rank}`);
             if (response.ok) {
                 const json = JSON.parse(await response.text());
                 const females = json.females;

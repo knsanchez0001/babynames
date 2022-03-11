@@ -14,7 +14,7 @@ const NamePopularity = () => {
 
     useEffect(() => {
         const getBabynames = async () => {
-            const response = await fetch(`/name_range/${sex}/${name}/${start}/2020`);
+            const response = await fetch(`/api/name_range/${sex}/${name}/${start}/2020`);
             if (response.ok) {
                 const json = JSON.parse(await response.text());
 

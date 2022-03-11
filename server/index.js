@@ -13,13 +13,12 @@ const state_female_names = "state_female_names";
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ufxrh.mongodb.net/${baby_names}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
-app.use(express.static(path.join(__dirname, '../client/build')));
+app.use('/namepopularity/Avigail/2000/F', (req, res, next) => {
+    console.log('Request Type:', req.method)
+    next()
+  })
 
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname+'../client/build/index.html'));
-});
-
-app.get('/top_ten_names/:year', async (req, res) => {
+app.get('/api/top_ten_names/:year', async (req, res) => {
     const year = parseInt(req.params.year);
     const query = [
         {
@@ -59,7 +58,7 @@ app.get('/top_ten_names/:year', async (req, res) => {
     res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/top_names/:year/:limit', async (req, res) => {
+app.get('/api/top_names/:year/:limit', async (req, res) => {
     const year = parseInt(req.params.year);
     const limit = parseInt(req.params.limit);
     const query = [
@@ -100,7 +99,7 @@ app.get('/top_names/:year/:limit', async (req, res) => {
     res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
+app.get('/api/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
     const sex = req.params.sex;
     const name = req.params.name;
     const startYear = parseInt(req.params.startYear);
@@ -140,7 +139,7 @@ app.get('/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
     res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/top_ten_names_state/:state/:year', async (req, res) => {
+app.get('/api/top_ten_names_state/:state/:year', async (req, res) => {
     const state = req.params.state;
     const year = parseInt(req.params.year);
     const query = [
@@ -184,7 +183,7 @@ app.get('/top_ten_names_state/:state/:year', async (req, res) => {
     res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/top_names_range/:startYear/:endYear', async (req, res) => {
+app.get('/api/top_names_range/:startYear/:endYear', async (req, res) => {
     const startYear = parseInt(req.params.startYear);
     const endYear = parseInt(req.params.endYear);
     const query = [
@@ -249,6 +248,12 @@ app.get('/top_names_range/:startYear/:endYear', async (req, res) => {
     const result = await retrieveTwoCols(female_names, male_names, query);
     res.header("Content-Type", 'application/json');
     res.send(JSON.stringify(result, null, 4));
+});
+
+
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname+'/../client/build/index.html'));
 });
 
 async function retrieveTwoCols(female_col, male_col, query) {
