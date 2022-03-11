@@ -8,7 +8,9 @@ const RankChange = () => {
     <>
       <IntroSection child={back} />
       <section>
-        
+        <h3 className='header-c'>
+          <span className='header-c-text'>TODO</span>
+        </h3>
       </section>
     </>
   )
