@@ -1,17 +1,22 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
 
-const IntroSection = ({child}) => {
-  return (
-    <section>
-        <div className='wrapper'>
-          {child}
-        </div>
-    </section>
-  )
-}
+const IntroSection = ({ child }) => {
+	return (
+		<section>
+			<div className='wrapper'>
+				{child}
+			</div>
+		</section>
+	);
+};
 
 IntroSection.defaultProps = {
-  child : <></>
-}
+	child: <></>
+};
 
-export default IntroSection
+IntroSection.propTypes = {
+	child: PropTypes.instanceOf(Element)
+};
+
+export default IntroSection;
