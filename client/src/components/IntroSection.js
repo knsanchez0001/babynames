@@ -16,7 +16,7 @@ IntroSection.defaultProps = {
 };
 
 IntroSection.propTypes = {
-	child: PropTypes.instanceOf(Element)
+	child: PropTypes.instanceOf(Object)
 };
 
 export default IntroSection;

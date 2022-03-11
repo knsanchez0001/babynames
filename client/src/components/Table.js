@@ -22,7 +22,7 @@ const Table = ({ heading, body }) => {
 
 Table.propTypes = {
 	heading: PropTypes.array.isRequired,
-	body: PropTypes.array.isRequired
+	body: PropTypes.array
 };
 
 export default Table;
