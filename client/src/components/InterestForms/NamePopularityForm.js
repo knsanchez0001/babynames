@@ -4,12 +4,19 @@ import { useNavigate } from 'react-router-dom';
 const NamePopularityForm = () => {
     const navigate = useNavigate();
 
+    /**
+     * @param {string} name
+     * @returns {string}
+     */
+    function formatName(name) {
+        return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+    }
+
     function handleSubmit(e) {
         e.preventDefault();
-        const name = document.getElementById('name').value;
+        const name = formatName(document.getElementById('name').value);
         const start = document.getElementById('start').value;
-        const sex = document.querySelector('input[name="sex"]:checked').value
-        console.log(sex);
+        const sex = document.querySelector('input[name="sex"]:checked').value;
         navigate(`/namepopularity/${name}/${start}/${sex}`);
     }
 
