@@ -29,8 +29,6 @@ const NamesByBirthYear = () => {
 
                 fillArray(males);
                 fillArray(females);
-                console.log(males.length);
-                console.log(females.length);
 
                 const body = [];
                 for (let i = 0; i < rank; i++) {
