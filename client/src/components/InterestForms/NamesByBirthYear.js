@@ -9,17 +9,17 @@ const NamesByBirthYear = () => {
 
     let [tableBody, setTableBody] = useState(null);
 
-    const fillArray = (names) => {
-        if (!names.length || names.length === rank){
-            return;
-        }
-        const fillLength = rank - names.length;
-        const arr = new Array(fillLength);
-        arr.fill({id: '', count: 0})
-        names.push(...arr);
-    }
-
     useEffect(() => {
+        const fillArray = (names) => {
+            if (!names.length || names.length === rank){
+                return;
+            }
+            const fillLength = rank - names.length;
+            const arr = new Array(fillLength);
+            arr.fill({id: '', count: 0})
+            names.push(...arr);
+        }
+
         const getBabynames = async () => {
             const response = await fetch(`/api/top_names/${year}/${rank}`);
             if (response.ok) {
