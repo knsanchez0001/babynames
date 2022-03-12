@@ -135,9 +135,10 @@ app.get('/api/name_range/:sex/:name/:startYear/:endYear', async (req, res) => {
 	res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/api/top_ten_names_state/:state/:year', async (req, res) => {
+app.get('/api/top_names_state/:state/:year/:limit', async (req, res) => {
 	const state = req.params.state;
 	const year = parseInt(req.params.year);
+	const limit = parseInt(req.params.limit);
 	const query = [
 		{
 			'$project': {
@@ -171,7 +172,7 @@ app.get('/api/top_ten_names_state/:state/:year', async (req, res) => {
 				'rank': 1
 			}
 		}, {
-			'$limit': 10
+			'$limit': limit
 		}
 	];
 	const result = await retrieveTwoCols(state_female_names, state_male_names, query);
