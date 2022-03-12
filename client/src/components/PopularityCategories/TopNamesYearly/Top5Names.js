@@ -8,7 +8,7 @@ const Top5Names = () => {
 
 	useEffect(() => {
 		getTopNames(setTableBody);
-	});
+	}, []);
 
 	const tableHeading = [
 		{ label: 'Year', color: '#eeeeee' },
