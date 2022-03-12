@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const NamesYearStateForm = ({parentCallback}) => {
-	// const navigate = useNavigate();
 
 	function handleSubmit(e) {
 		e.preventDefault();
