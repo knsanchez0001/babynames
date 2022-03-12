@@ -11,6 +11,8 @@ const male_names = 'male_names';
 const female_names = 'female_names';
 const state_male_names = 'state_male_names';
 const state_female_names = 'state_female_names';
+const territory_female_names = 'territory_female_names';
+const territory_male_names = 'territory_male_names';
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ufxrh.mongodb.net/${baby_names}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
@@ -269,6 +271,59 @@ app.get('/api/top_five_yearly', async (req, res) => {
 		}
 	];
 	const result = await retrieveTwoCols(female_names, male_names, query);
+	res.header('Content-Type', 'application/json');
+	res.send(JSON.stringify(result, null, 4));
+});
+
+app.get('/api/top_names_territory/:territory/:year', async (req, res) => {
+	const territory = req.params.territory;
+	const year = parseInt(req.params.year);
+	const query = [
+		{
+			'$project': {
+				'territory': `$state.${territory}`
+			}
+		}, {
+			'$match': {
+				'territory': {
+					'$exists': true
+				}
+			}
+		}, {
+			'$project': {
+				'territory': {
+					'$filter': {
+						'input': '$territory',
+						'as': 'y',
+						'cond': {
+							'$eq': [
+								'$$y.year', year
+							]
+						}
+					}
+				}
+			}
+		}, {
+			'$match': {
+				'territory': {
+					'$size': 1
+				}
+			}
+		}, {
+			'$unwind': {
+				'path': '$territory'
+			}
+		}, {
+			'$sort': {
+				'territory.rank': 1
+			}
+		}, {
+			'$project': {
+				'count': '$territory.count'
+			}
+		}
+	];
+	const result = await retrieveTwoCols(territory_female_names, territory_male_names, query);
 	res.header('Content-Type', 'application/json');
 	res.send(JSON.stringify(result, null, 4));
 });
