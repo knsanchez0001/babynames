@@ -365,32 +365,28 @@ app.get('/api/change_in_popularity/:direction/:startYear/:endYear', async (req, 
 		],
 		same: [
 			{
-				'$match': {
-					'startRank': {
-						'$lte': 1000
-					}
+
+				'startRank': {
+					'$lte': 1000
 				}
+
 			},
 			{
-				'$match': {
-					'$and': [
-						{
-							'change': {
-								'$lte': 4
-							}
-						}, {
-							'change': {
-								'$gte': -4
-							}
+				'$and': [
+					{
+						'change': {
+							'$lte': 4
 						}
-					]
-				}
+					}, {
+						'change': {
+							'$gte': -4
+						}
+					}
+				]
 			},
 			{
-				'$sort': {
-					'change': -1,
-					'endRank': -1
-				}
+				'change': -1,
+				'endRank': -1
 			}
 		]
 	};
