@@ -14,11 +14,6 @@ const state_female_names = 'state_female_names';
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@cluster0.ufxrh.mongodb.net/${baby_names}?retryWrites=true&w=majority`;
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
-app.use('/namepopularity/Avigail/2000/F', (req, res, next) => {
-	console.log('Request Type:', req.method);
-	next();
-});
-
 app.get('/api/top_ten_names/:year', async (req, res) => {
 	const year = parseInt(req.params.year);
 	const query = [
