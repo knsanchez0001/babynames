@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import RankChange from './components/PopularityCategories/RankChange';
+import RankChange from './components/PopularityCategories/ChangeInPopularity/RankChange';
 import Top5Names from './components/PopularityCategories/TopNamesYearly/Top5Names';
 import Timespan from './components/PopularityCategories/Timespan/Timespan';
 import State from './components/PopularityCategories/State/State';
