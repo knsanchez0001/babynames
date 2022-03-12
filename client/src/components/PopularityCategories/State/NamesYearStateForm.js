@@ -8,8 +8,6 @@ const NamesYearStateForm = ({parentCallback}) => {
 		e.preventDefault();
 		const state = document.getElementById('state').value;
 		const birthYear = document.getElementById('birth-year').value;
-		console.log(state);
-		console.log(birthYear);
 		parentCallback({state, birthYear});
 	}
 
