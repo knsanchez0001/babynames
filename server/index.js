@@ -328,7 +328,73 @@ app.get('/api/top_names_territory/:territory/:year', async (req, res) => {
 	res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/api/change_in_popularity', async (req, res) => {
+app.get('/api/change_in_popularity/:direction/:startYear/:endYear', async (req, res) => {
+	const direction = req.params.direction;
+	const startYear = parseInt(req.params.startYear);
+	const endYear = parseInt(req.params.endYear);
+	const queryStages = {
+		decrease: [
+			{
+				'startRank': {
+					'$lte': 1000
+				},
+			},
+			{
+				'change': {
+					'$lt': -4
+				}
+			},
+			{
+				'change': 1
+			}
+		],
+		increase: [
+			{
+				'endRank': {
+					'$lte': 1000
+				}
+			},
+			{
+				'change': {
+					'$gt': 4
+				}
+			},
+			{
+				'change': -1
+			}
+		],
+		same: [
+			{
+				'$match': {
+					'startRank': {
+						'$lte': 1000
+					}
+				}
+			},
+			{
+				'$match': {
+					'$and': [
+						{
+							'change': {
+								'$lte': 4
+							}
+						}, {
+							'change': {
+								'$gte': -4
+							}
+						}
+					]
+				}
+			},
+			{
+				'$sort': {
+					'change': -1,
+					'endRank': -1
+				}
+			}
+		]
+	};
+
 	const query = [
 		{
 			'$project': {
@@ -338,7 +404,7 @@ app.get('/api/change_in_popularity', async (req, res) => {
 						'as': 'val',
 						'cond': {
 							'$eq': [
-								'$$val.year', 2019
+								'$$val.year', startYear
 							]
 						}
 					}
@@ -349,7 +415,7 @@ app.get('/api/change_in_popularity', async (req, res) => {
 						'as': 'val',
 						'cond': {
 							'$eq': [
-								'$$val.year', 2020
+								'$$val.year', endYear
 							]
 						}
 					}
@@ -371,11 +437,7 @@ app.get('/api/change_in_popularity', async (req, res) => {
 				'endYear': '$endYear.year'
 			}
 		}, {
-			'$match': {
-				'endRank': {
-					'$lte': 1000
-				}
-			}
+			'$match': queryStages[direction][0]
 		}, {
 			'$addFields': {
 				'change': {
@@ -385,15 +447,9 @@ app.get('/api/change_in_popularity', async (req, res) => {
 				}
 			}
 		}, {
-			'$match': {
-				'change': {
-					'$gt': 4
-				}
-			}
+			'$match': queryStages[direction][1]
 		}, {
-			'$sort': {
-				'change': -1
-			}
+			'$sort': queryStages[direction][2]
 		}
 	];
 	const result = await retrieveTwoCols(female_names, male_names, query);
