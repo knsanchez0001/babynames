@@ -328,6 +328,79 @@ app.get('/api/top_names_territory/:territory/:year', async (req, res) => {
 	res.send(JSON.stringify(result, null, 4));
 });
 
+app.get('/api/change_in_popularity', async (req, res) => {
+	const query = [
+		{
+			'$project': {
+				'startYear': {
+					'$filter': {
+						'input': '$years',
+						'as': 'val',
+						'cond': {
+							'$eq': [
+								'$$val.year', 2019
+							]
+						}
+					}
+				},
+				'endYear': {
+					'$filter': {
+						'input': '$years',
+						'as': 'val',
+						'cond': {
+							'$eq': [
+								'$$val.year', 2020
+							]
+						}
+					}
+				}
+			}
+		}, {
+			'$unwind': {
+				'path': '$startYear'
+			}
+		}, {
+			'$unwind': {
+				'path': '$endYear'
+			}
+		}, {
+			'$project': {
+				'startRank': '$startYear.rank',
+				'startYear': '$startYear.year',
+				'endRank': '$endYear.rank',
+				'endYear': '$endYear.year'
+			}
+		}, {
+			'$match': {
+				'endRank': {
+					'$lte': 1000
+				}
+			}
+		}, {
+			'$addFields': {
+				'change': {
+					'$subtract': [
+						'$startRank', '$endRank'
+					]
+				}
+			}
+		}, {
+			'$match': {
+				'change': {
+					'$gt': 4
+				}
+			}
+		}, {
+			'$sort': {
+				'change': -1
+			}
+		}
+	];
+	const result = await retrieveTwoCols(female_names, male_names, query);
+	res.header('Content-Type', 'application/json');
+	res.send(JSON.stringify(result, null, 4));
+});
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '/../client/build/index.html'));
