@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import IntroSection from '../IntroSection';
-import Table from '../Table';
+import IntroSection from '../../IntroSection';
+import Table from '../../Table';
 
 const Top5Names = () => {
 	let [tableBody, setTableBody] = useState(null);
