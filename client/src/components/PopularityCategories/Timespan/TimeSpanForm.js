@@ -1,17 +1,13 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const TimeSpanForm = ({parentCallback}) => {
+const TimeSpanForm = ({ parentCallback }) => {
 	let [startYear, setStartYear] = useState(null);
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		const endYear = document.getElementById('end-year').value;
-		parentCallback({startYear, endYear});
-	}
-
-	function getStartYear(){
-		return startYear ? Math.max(startYear, 1880) : 1880;
+		parentCallback({ startYear, endYear });
 	}
 
 	return (
@@ -24,11 +20,11 @@ const TimeSpanForm = ({parentCallback}) => {
 					<label htmlFor='start-year'>Start Year</label>
 				</p>
 				<p>
-					<input id='end-year' type='number' min={getStartYear()} max='2020' className='interest-input' title="end year: Must be four numbers" required />
+					<input id='end-year' type='number' min={startYear ? Math.max(startYear, 1880) : 1880} max='2020' className='interest-input' title="end year: Must be four numbers" required />
 					<label htmlFor='end-year'>End Year</label>
 				</p>
 				<p>
-					<input type='submit' value='Go'/>
+					<input type='submit' value='Go' />
 				</p>
 			</form>
 		</div>
