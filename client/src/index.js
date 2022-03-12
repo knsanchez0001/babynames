@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import RankChange from './components/PopularityCategories/RankChange';
 import Top5Names from './components/PopularityCategories/Top5Names';
-import Timespan from './components/PopularityCategories/Timespan';
+import Timespan from './components/PopularityCategories/Timespan/Timespan';
 import State from './components/PopularityCategories/State/State';
 import Territories from './components/PopularityCategories/Territories';
 import NamePopularity from './components/InterestForms/NamePopularity';

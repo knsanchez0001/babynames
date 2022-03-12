@@ -208,38 +208,25 @@ app.get('/api/top_names_range/:startYear/:endYear', async (req, res) => {
 			}
 		}, {
 			'$project': {
-				'total': {
+				'count': {
 					'$sum': '$years.count'
 				}
 			}
 		},
 		{
 			'$match': {
-				'total': {
+				'count': {
 					'$gt': 0
 				}
 			}
 		},
 		{
-			'$setWindowFields': {
-				'sortBy': {
-					'total': -1
-				},
-				'output': {
-					'rank': {
-						'$rank': {}
-					}
-				}
-			}
-		}
-		,
-		{
 			'$sort': {
-				'total': 1
+				'count': -1
 			}
 		},
 		{
-			'$limit': 15
+			'$limit': 100
 		}
 	];
 	const result = await retrieveTwoCols(female_names, male_names, query);
