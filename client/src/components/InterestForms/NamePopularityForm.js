@@ -31,10 +31,11 @@ const NamePopularityForm = () => {
 				</p>
 				<p>
 					<select id='start' name='start'>
-						<option value="2000" defaultValue="2000">2000 &amp; later</option>
-						<option value="1980">1960 &amp; later</option>
-						<option value="1960">1940 &amp; later</option>
-						<option value="1940">1920 &amp; later</option>
+						<option value="2000">2000 &amp; later</option>
+						<option value="1980">1980 &amp; later</option>
+						<option value="1960">1960 &amp; later</option>
+						<option value="1940">1940 &amp; later</option>
+						<option value="1920">1920 &amp; later</option>
 						<option value="1900">1900 &amp; later</option>
 						<option value="1880">1880 &amp; later</option>
 					</select>
