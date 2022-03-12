@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Table = ({ heading, body, tableHeader }) => {
-	if (body === null) {
+	if (body === null || heading === null) {
 		return <></>;
 	}
 	return (
@@ -28,7 +28,7 @@ Table.defaultProps = {
 };
 
 Table.propTypes = {
-	heading: PropTypes.array.isRequired,
+	heading: PropTypes.array,
 	body: PropTypes.array,
 	tableHeader: PropTypes.object
 };
