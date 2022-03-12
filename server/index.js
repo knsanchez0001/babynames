@@ -234,7 +234,7 @@ app.get('/api/top_names_range/:startYear/:endYear', async (req, res) => {
 	res.send(JSON.stringify(result, null, 4));
 });
 
-app.get('/top_five_yearly', async (req, res) => {
+app.get('/api/top_five_yearly', async (req, res) => {
 	const query = [
 		{
 			'$unwind': {
