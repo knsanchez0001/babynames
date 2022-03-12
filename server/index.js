@@ -234,10 +234,48 @@ app.get('/api/top_names_range/:startYear/:endYear', async (req, res) => {
 	res.send(JSON.stringify(result, null, 4));
 });
 
+app.get('/top_five_yearly', async (req, res) => {
+	const query = [
+		{
+			'$unwind': {
+				'path': '$years'
+			}
+		}, {
+			'$project': {
+				'year': '$years.year',
+				'rank': '$years.rank'
+			}
+		}, {
+			'$match': {
+				'rank': {
+					'$lte': 5
+				}
+			}
+		}, {
+			'$sort': {
+				'rank': 1
+			}
+		}, {
+			'$group': {
+				'_id': '$year',
+				'names': {
+					'$push': '$_id'
+				}
+			}
+		}, {
+			'$sort': {
+				'_id': -1
+			}
+		}
+	];
+	const result = await retrieveTwoCols(female_names, male_names, query);
+	res.header('Content-Type', 'application/json');
+	res.send(JSON.stringify(result, null, 4));
+});
 
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('*', (req, res) => {
-	res.sendFile(path.join(__dirname+'/../client/build/index.html'));
+	res.sendFile(path.join(__dirname + '/../client/build/index.html'));
 });
 
 async function retrieveTwoCols(female_col, male_col, query) {
