@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import IntroSection from '../IntroSection';
+import IntroSection from '../../IntroSection';
 
 const Territories = () => {
 	const back = <Link className='a-top' to={'/'}>Back</Link>;

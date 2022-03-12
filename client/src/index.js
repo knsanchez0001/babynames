@@ -8,7 +8,7 @@ import RankChange from './components/PopularityCategories/RankChange';
 import Top5Names from './components/PopularityCategories/TopNamesYearly/Top5Names';
 import Timespan from './components/PopularityCategories/Timespan/Timespan';
 import State from './components/PopularityCategories/State/State';
-import Territories from './components/PopularityCategories/Territories';
+import Territories from './components/PopularityCategories/Territories/Territories';
 import NamePopularity from './components/InterestForms/NamePopularity';
 import NamesByBirthYear from './components/InterestForms/NamesByBirthYear';
 
