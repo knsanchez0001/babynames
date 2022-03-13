@@ -3,61 +3,8 @@ import { Link } from 'react-router-dom';
 import IntroSection from '../../IntroSection';
 import Table from '../../Table';
 import NamesYearStateForm from './NamesYearStateForm';
+import { stateIndex, femaleTableHeading, maleTableHeading, tableHeading } from './StateUtils';
 import Top5NamesStateForm from './Top5NamesStateForm';
-
-const stateIndex = {
-	AL : 0,
-	AK : 1,
-	AZ : 2,
-	AR : 3,
-	CA : 4,
-	CO : 5,
-	CT : 6,
-	DE : 7,
-	DC : 8,
-	FL : 9,
-	GA : 10,
-	HI : 11,
-	ID : 12,
-	IL : 13,
-	IN : 14,
-	IA : 15,
-	KS : 16,
-	KY : 17,
-	LA : 18,
-	ME : 19,
-	MD : 20,
-	MA : 21,
-	MI : 22,
-	MN : 23,
-	MS : 24,
-	MO : 25,
-	MT : 26,
-	NE : 27,
-	NV : 28,
-	NH : 29,
-	NJ : 30,
-	NM : 31,
-	NY : 32,
-	NC : 33,
-	ND : 34,
-	OH : 35,
-	OK : 36,
-	OR : 37,
-	PA : 38,
-	RI : 39,
-	SC : 40,
-	SD : 41,
-	TN : 42,
-	TX : 43,
-	UT : 44,
-	VT : 45,
-	VA : 46,
-	WA : 47,
-	WV : 48,
-	WI : 49,
-	WY : 50
-};
 
 const State = () => {
 	let [input, setInput] = useState(null);
@@ -76,8 +23,6 @@ const State = () => {
 	const handleCallback2 = (childInput) => {
 		setInput2(childInput);
 	};
-
-
 
 	useEffect(() => {
 		if (input) {
@@ -134,7 +79,7 @@ async function getTopNamesByState(input, setTableBody, setTableHeading) {
 			body.push([(i + 1).toString(), males[i]._id, males[i].count.toLocaleString('en'), females[i]._id, females[i].count.toLocaleString('en')]);
 		}
 		setTableBody(body);
-		setTableHeading(input.tableHeading);
+		setTableHeading(tableHeading);
 	}
 }
 
@@ -154,11 +99,11 @@ async function getTopNamesPerYear(input, setFemaleTableBody, setFemaleTableHeadi
 		const json = JSON.parse(await response.text());
 		const females = json.females;
 		const males = json.males;
-		
+
 		setTable(females, setFemaleTableBody);
-		setFemaleTableHeading(input.femaleTableHeading);
+		setFemaleTableHeading(femaleTableHeading);
 		setTable(males, setMaleTableBody);
-		setMaleTableHeading(input.maleTableHeading);
+		setMaleTableHeading(maleTableHeading);
 	}
 }
 

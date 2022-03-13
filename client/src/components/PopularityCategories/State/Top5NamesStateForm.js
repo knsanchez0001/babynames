@@ -1,23 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const femaleTableHeading = [
-	{ label: 'State', color: 'pink' }, { label: '1', color: 'pink' },
-	{ label: '2', color: 'pink' }, { label: '3', color: 'pink' },
-	{ label: '4', color: 'pink' }, { label: '5', color: 'pink' }
-];
-const maleTableHeading = [
-	{ label: 'State', color: '#99ccff' }, { label: '1', color: '#99ccff' },
-	{ label: '2', color: '#99ccff' }, { label: '3', color: '#99ccff' },
-	{ label: '4', color: '#99ccff' }, { label: '5', color: '#99ccff' }
-];
-
 const Top5NamesStateForm = ({ parentCallback }) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		const birthYear = document.getElementById('birth-year2').value;
-		parentCallback({ birthYear, femaleTableHeading, maleTableHeading });
+		parentCallback({ birthYear });
 	}
 
 	return (
