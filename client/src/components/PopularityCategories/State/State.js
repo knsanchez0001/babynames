@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import IntroSection from '../../IntroSection';
 import Table from '../../Table';
 import NamesYearStateForm from './NamesYearStateForm';
-import { stateIndex, femaleTableHeading, maleTableHeading, tableHeading } from './StateUtils';
+import { stateIndex, femaleTableHeading, maleTableHeading, tableHeading } from './stateUtils';
 import Top5NamesStateForm from './Top5NamesStateForm';
 
 const State = () => {
