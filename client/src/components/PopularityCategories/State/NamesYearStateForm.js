@@ -1,13 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const NamesYearStateForm = ({parentCallback}) => {
+const tableHeading = [
+	{ label: 'Rank', color: '#eeeeee' },
+	{ label: 'Male Name', color: '#99ccff' }, { label: 'Number of Males', color: '#99ccff' },
+	{ label: 'Female Name', color: 'pink' }, { label: 'Number of Females', color: 'pink' }];
+
+const NamesYearStateForm = ({ parentCallback }) => {
 
 	function handleSubmit(e) {
 		e.preventDefault();
 		const state = document.getElementById('state').value;
 		const birthYear = document.getElementById('birth-year').value;
-		parentCallback({state, birthYear});
+		parentCallback({ state, birthYear, tableHeading });
 	}
 
 	return (

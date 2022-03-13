@@ -453,6 +453,67 @@ app.get('/api/change_in_popularity/:direction/:startYear/:endYear', async (req, 
 	res.send(JSON.stringify(result, null, 4));
 });
 
+app.get('/api/top_five_per_state/:year', async (req, res) => {
+	const year = parseInt(req.params.year);
+	const query = [
+		{
+			'$project': {
+				'state': {
+					'$objectToArray': '$state'
+				}
+			}
+		}, {
+			'$unwind': {
+				'path': '$state'
+			}
+		}, {
+			'$project': {
+				'data': {
+					'$filter': {
+						'input': '$state.v',
+						'as': 'v',
+						'cond': {
+							'$eq': [
+								'$$v.year', year
+							]
+						}
+					}
+				},
+				'state': '$state.k'
+			}
+		}, {
+			'$unwind': {
+				'path': '$data'
+			}
+		}, {
+			'$match': {
+				'data.rank': {
+					'$lte': 5
+				}
+			}
+		}, {
+			'$project': {
+				'state': '$state',
+				'rank': '$data.rank'
+			}
+		}, {
+			'$sort': {
+				'rank': 1
+			}
+		}, {
+			'$group': {
+				'_id': '$state',
+				'names': {
+					'$push': '$_id'
+				}
+			}
+		}
+	];
+	const result = await retrieveTwoCols(state_female_names, state_male_names, query);
+	res.header('Content-Type', 'application/json');
+	res.send(JSON.stringify(result, null, 4));
+});
+
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.get('*', (req, res) => {
 	res.sendFile(path.join(__dirname + '/../client/build/index.html'));
