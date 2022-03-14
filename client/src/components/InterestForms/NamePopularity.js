@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import IntroSection from '../IntroSection';
 import Table from '../Table';
+import NamePopularityForm from './NamePopularityForm';
 
 const NamePopularity = () => {
 	const { name, start, sex } = useParams();
@@ -36,8 +37,9 @@ const NamePopularity = () => {
 			<IntroSection child={back} />
 			<section>
 				<h3 className='header-c'>
-					<span className='header-c-text'>Popularity of name {name}</span>
+					<span className='header-c-text'>Popularity of {sex === 'F' ? 'female' : 'male'} name {name}</span>
 				</h3>
+				<NamePopularityForm/>
 				<Table heading={tableHeading} body={tableBody} />
 			</section>
 		</>

@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import IntroSection from '../IntroSection';
 import Table from '../Table';
+import NamesByBirthYearForm from './NamesByBirthYearForm';
 
 const NamesByBirthYear = () => {
 	const { year, rank } = useParams();
@@ -54,6 +55,7 @@ const NamesByBirthYear = () => {
 				<h3 className='header-c'>
 					<span className='header-c-text'>Popular Names in {year}</span>
 				</h3>
+				<NamesByBirthYearForm/>
 				<Table heading={tableHeading} body={tableBody} />
 			</section>
 		</>
