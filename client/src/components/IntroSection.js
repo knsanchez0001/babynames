@@ -12,11 +12,11 @@ const IntroSection = ({ child }) => {
 };
 
 IntroSection.defaultProps = {
-	child: <></>
+	child: <a className='a-top' href='https://github.com/knsanchez0001/babynames'>GitHub Code</a>
 };
 
 IntroSection.propTypes = {
-	child: PropTypes.instanceOf(Object)
+	child: PropTypes.instanceOf(Element)
 };
 
 export default IntroSection;

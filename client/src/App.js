@@ -5,10 +5,9 @@ import PopularityCategories from './components/PopularityCategories/PopularityCa
 import TopNamesTable from './components/TopNamesTable/TopNamesTable';
 
 function App() {
-	const github = <a className='a-top' href='https://github.com/knsanchez0001/babynames'>GitHub Code</a>;
 	return (
 		<div>
-			<IntroSection child={github}/>
+			<IntroSection/>
 			<TopNamesTable/>
 			<PopularityCategories/>
 			<InterestForms/>
