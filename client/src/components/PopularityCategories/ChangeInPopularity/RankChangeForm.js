@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 const RankChangeForm = ({ parentCallback }) => {
 	let [startYear, setStartYear] = useState(null);
 
+	/**
+	 * 
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const direction = document.querySelector('input[name="change"]:checked').value;

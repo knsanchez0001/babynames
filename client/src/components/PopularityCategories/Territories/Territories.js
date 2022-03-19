@@ -9,6 +9,12 @@ const Territories = () => {
 	let [tableBody, setTableBody] = useState(null);
 	let [tableHeader, setTableHeader] = useState(null);
 
+	/**
+	 * 
+	 * @param {object} childInput 
+	 * @param {string} childInput.territory
+	 * @param {string} childInput.birthYear
+	 */
 	const handleCallback = (childInput) => {
 		setInput(childInput);
 	};
@@ -43,9 +49,18 @@ const Territories = () => {
 /**
  * 
  * @param {object} input 
- * @param {function} setTableBody 
+ * @param {function} setTableBody
+ * @param {function} setTableHeader
  */
 async function getTopNamesByTerritory(input, setTableBody, setTableHeader) {
+
+	/**
+	 * 
+	 * @param {object[]} names An array of name objects
+	 * @param {string} names[].id The id (person's name)
+	 * @param {number} names[].count The frequency of the given name counted
+	 * @param {number} length
+	 */
 	const fillArray = (names, length) => {
 		if (!names.length || names.length === length) {
 			return;

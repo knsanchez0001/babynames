@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 const TimeSpanForm = ({ parentCallback }) => {
 	let [startYear, setStartYear] = useState(null);
 
+	/**
+	 * 
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const endYear = document.getElementById('end-year').value;

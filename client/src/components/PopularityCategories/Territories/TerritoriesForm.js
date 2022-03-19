@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 const TerritoriesForm = ({ parentCallback }) => {
 
+	/**
+	 * 
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const elem = document.querySelector('input[name="territory"]:checked');

@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 const NamesYearStateForm = ({ parentCallback }) => {
 
+	/**
+	 * 
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const state = document.getElementById('state').value;

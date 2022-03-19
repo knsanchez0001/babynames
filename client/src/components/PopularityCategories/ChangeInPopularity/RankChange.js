@@ -37,8 +37,26 @@ const RankChange = () => {
 	);
 };
 
+/**
+ * 
+ * @param {object} input 
+ * @param {string} input.direction
+ * @param {string} input.startYear
+ * @param {string} input.endYear
+ * @param {function} setFemaleTableBody 
+ * @param {function} setFemaleTableHeading 
+ * @param {function} setMaleTableBody 
+ * @param {function} setMaleTableHeading 
+ */
 async function getNamesByRankChange(input, setFemaleTableBody, setFemaleTableHeading, setMaleTableBody, setMaleTableHeading) {
 
+	/**
+	 * 
+	 * @param {object[]} names - An array of name objects
+	 * @param {string} names[].id - The id (person's name)
+	 * @param {number} names[].count - The frequency of the given name counted 
+	 * @param {Function}
+	 */
 	function setTable(names, funcTableBody) {
 		const body = [];
 		for (let i = 0; i < names.length; i++) {

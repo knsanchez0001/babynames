@@ -7,8 +7,8 @@ import { stateIndex, femaleTableHeading, maleTableHeading, tableHeading } from '
 import Top5NamesStateForm from './Top5NamesStateForm';
 
 const State = () => {
-	let [input, setInput] = useState(null);
-	let [input2, setInput2] = useState(null);
+	let [nameYearInput, setNameYearInput] = useState(null);
+	let [top5Input, setTop5Input] = useState(null);
 	let [tableBody, setTableBody] = useState(null);
 	let [tableHeading, setTableHeading] = useState(null);
 	let [femaleTableBody, setFemaleTableBody] = useState(null);
@@ -16,31 +16,31 @@ const State = () => {
 	let [femaleTableHeading, setFemaleTableHeading] = useState(null);
 	let [maleTableHeading, setMaleTableHeading] = useState(null);
 
-	const handleCallback = (childInput) => {
-		setInput(childInput);
+	const nameYearCallback = (childInput) => {
+		setNameYearInput(childInput);
 	};
 
-	const handleCallback2 = (childInput) => {
-		setInput2(childInput);
+	const top5Callback = (childInput) => {
+		setTop5Input(childInput);
 	};
 
 	useEffect(() => {
-		if (input) {
+		if (nameYearInput) {
 			setFemaleTableBody(null);
 			setFemaleTableHeading(null);
 			setMaleTableBody(null);
 			setMaleTableHeading(null);
-			getTopNamesByState(input, setTableBody, setTableHeading);
+			getTopNamesByState(nameYearInput, setTableBody, setTableHeading);
 		}
-	}, [input]);
+	}, [nameYearInput]);
 
 	useEffect(() => {
-		if (input2) {
+		if (top5Input) {
 			setTableBody(null);
 			setTableHeading(null);
-			getTopNamesPerYear(input2, setFemaleTableBody, setFemaleTableHeading, setMaleTableBody, setMaleTableHeading);
+			getTopNamesPerYear(top5Input, setFemaleTableBody, setFemaleTableHeading, setMaleTableBody, setMaleTableHeading);
 		}
-	}, [input2]);
+	}, [top5Input]);
 
 	const back = <Link className='a-top' to={'/'}>Back</Link>;
 	return (
@@ -51,8 +51,8 @@ const State = () => {
 					<span className='header-c-text'>Popular Names by State</span>
 				</h3>
 				<div className='interest-wrapper'>
-					<NamesYearStateForm parentCallback={handleCallback} />
-					<Top5NamesStateForm parentCallback={handleCallback2} />
+					<NamesYearStateForm parentCallback={nameYearCallback} />
+					<Top5NamesStateForm parentCallback={top5Callback} />
 				</div>
 				<Table heading={tableHeading} body={tableBody} />
 				<Table heading={femaleTableHeading} body={femaleTableBody} />
@@ -65,7 +65,10 @@ const State = () => {
 /**
  * 
  * @param {object} input 
+ * @param {string} input.state
+ * @param {string} input.birthYear
  * @param {function} setTableBody 
+ * @param {function} setTableHeading
  */
 async function getTopNamesByState(input, setTableBody, setTableHeading) {
 	const response = await fetch(`/api/top_names_state/${input.state}/${input.birthYear}/100`);
@@ -83,7 +86,23 @@ async function getTopNamesByState(input, setTableBody, setTableHeading) {
 	}
 }
 
+/**
+ * 
+ * @param {object} input
+ * @param {string} input.birthYear
+ * @param {function} setFemaleTableBody 
+ * @param {function} setFemaleTableHeading 
+ * @param {function} setMaleTableBody 
+ * @param {function} setMaleTableHeading 
+ */
 async function getTopNamesPerYear(input, setFemaleTableBody, setFemaleTableHeading, setMaleTableBody, setMaleTableHeading) {
+	/**
+	 * 
+	 * @param {object[]} state 
+	 * @param {string[]} state[].names
+	 * @param {string} state[]._id
+	 * @param {function} funcTableBody 
+	 */
 	function setTable(state, funcTableBody) {
 		const body = new Array(51);
 		for (let i = 0; i < state.length; i++) {

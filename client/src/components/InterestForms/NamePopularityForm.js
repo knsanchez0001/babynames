@@ -5,6 +5,7 @@ const NamePopularityForm = () => {
 	const navigate = useNavigate();
 
 	/**
+	 * Formats string to capitalize first letter and set following letters to lowercase
 	 * @param {string} name
 	 * @returns {string}
 	 */
@@ -12,6 +13,10 @@ const NamePopularityForm = () => {
 		return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
 	}
 
+	/**
+	 * Retrieves values in form to create a query to navigate '/namespopularity/:name/:startYear:/:sex' route
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const name = formatName(document.getElementById('name').value);

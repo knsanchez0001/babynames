@@ -3,6 +3,10 @@ import PropTypes from 'prop-types';
 
 const Top5NamesStateForm = ({ parentCallback }) => {
 
+	/**
+	 * 
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const birthYear = document.getElementById('birth-year2').value;

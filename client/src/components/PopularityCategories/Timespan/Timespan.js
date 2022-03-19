@@ -8,6 +8,12 @@ const Timespan = () => {
 	let [input, setInput] = useState(null);
 	let [tableBody, setTableBody] = useState(null);
 
+	/**
+	 * 
+	 * @param {object} childInput
+	 * @param {string} childInput.startYear
+	 * @param {string} childInput.endYear
+	 */
 	const handleCallback = (childInput) =>{
 		setInput(childInput);
 	};
@@ -38,6 +44,13 @@ const Timespan = () => {
 	);
 };
 
+/**
+	 * 
+	 * @param {object} input
+	 * @param {string} input.startYear
+	 * @param {string} input.endYear
+	 * @param {Function} setTableBody
+	 */
 async function getTopNamesByTimeSpan(input, setTableBody){
 	const response = await fetch(`/api/top_names_range/${input.startYear}/${input.endYear}`);
 	if (response.ok) {

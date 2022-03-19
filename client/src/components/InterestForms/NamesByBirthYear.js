@@ -12,6 +12,12 @@ const NamesByBirthYear = () => {
 	let [tableBody, setTableBody] = useState(null);
 
 	useEffect(() => {
+		/**
+		 * 
+		 * @param {object[]} names An array of name objects
+		 * @param {string} names[].id The id (person's name)
+		 * @param {number} names[].count The frequency of the given name counted
+		 */
 		const fillArray = (names) => {
 			if (!names.length || names.length === rank) {
 				return;
@@ -32,6 +38,9 @@ const NamesByBirthYear = () => {
 				fillArray(males);
 				fillArray(females);
 
+				/**
+				 * @type {Array<[string, string, string]>}
+				 */
 				const body = [];
 				for (let i = 0; i < rank; i++) {
 					body.push([(i + 1).toString(), males[i]._id, males[i].count.toLocaleString('en'), females[i]._id, females[i].count.toLocaleString('en')]);

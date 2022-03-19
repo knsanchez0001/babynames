@@ -30,7 +30,7 @@ Table.defaultProps = {
 Table.propTypes = {
 	heading: PropTypes.array,
 	body: PropTypes.array,
-	tableHeader: PropTypes.object
+	tableHeader: PropTypes.instanceOf(Element)
 };
 
 export default Table;

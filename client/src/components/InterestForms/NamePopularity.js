@@ -12,6 +12,10 @@ const NamePopularity = () => {
 	let [tableBody, setTableBody] = useState(null);
 
 	useEffect(() => {
+		/**
+		 * Fetches '/api/name_range/:sex/:name/:startYear/:endYear' to retrieve a json from MongoDB
+		 * given paremeters of the given sex, name, and timespan.
+		 */
 		const getBabynames = async () => {
 			const response = await fetch(`/api/name_range/${sex}/${name}/${start}/2020`);
 			if (response.ok) {

@@ -4,6 +4,10 @@ import { useNavigate } from 'react-router-dom';
 const NamesByBirthYearForm = () => {
 	const navigate = useNavigate();
 
+	/**
+	 * Retrieves values in form to create a query to navigate '/namesbirthyear/:year/:limit' route
+	 * @param {Event} e 
+	 */
 	function handleSubmit(e) {
 		e.preventDefault();
 		const birthYear = document.getElementById('birth-year').value;
